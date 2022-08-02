@@ -1,7 +1,8 @@
 ﻿// NocturnalPuzzle.cpp : Defines the entry point for the application.
 //
 
-#include "NocturnalPuzzle.h"
+#include <stdio.h>
+#include <stdbool.h>
 
 void find_word(const char word[], const int size, char puzzle[][20], int coords[])
 {
@@ -106,8 +107,8 @@ void read_puzzles(const char* filename, char arr1[][20], char arr2[][20])
 int main()
 {
 	const char* filename = "C:\\Users\\graha\\source\\repos\\NocturnalPuzzle\\NocturnalPuzzle\\puzzle.txt";
-	char puzzle1[20][20] = { {} };
-	char puzzle2[20][20] = { {} };
+	char puzzle1[20][20] = { {0} };
+	char puzzle2[20][20] = { {0} };
 	char word1[] = "nocturnal";
 	char word2[] = "defibrillator";
 	int coords1[2] = {21,21};
