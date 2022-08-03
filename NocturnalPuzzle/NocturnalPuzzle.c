@@ -1,7 +1,12 @@
 ﻿// NocturnalPuzzle.cpp : Defines the entry point for the application.
 //
 
+// Defines
+#define TESTING
+#define DEBUG
+
 #include "NocturnalPuzzle.h"
+#include "PuzzleTests.h"
 
 void find_word(const char word[], const int size, char puzzle[][20], int coords[])
 {
@@ -112,6 +117,22 @@ int main()
 	char word2[] = "defibrillator";
 	int coords1[2] = {21,21};
 	int coords2[2] = {21,21};
+
+// Unit tests
+#ifdef TESTING
+	if (test_rotate_puzzle()) {
+		printf("test_rotate_puzzle() failed.");
+		return 1;
+	}
+	if (test_find_word()) {
+		printf("test_find() failed.");
+		return 1;
+	}
+	if (test_read_puzzles()) {
+		printf("test_read_puzzles() failed.");
+		return 1;
+	}
+#endif
 	
 	read_puzzles(filename, puzzle1, puzzle2);
 	// try to find the word "nocturnal" up to 25 times, rotating each time it isn't found
@@ -121,7 +142,13 @@ int main()
 			rotate_puzzle(puzzle1);
 		}
 		else {
-			printf("x=%d, y=%d, count=%d\n", coords1[0], coords1[1], rot1);
+// functional test for puzzle 1
+#ifdef TESTING
+			if ((coords1[0] != 5) && (coords1[1] != 15) && (rot1 != 8)) {
+				return 1;
+			}
+#endif
+			printf("x=%d, y=%d, count=%d\n", coords1[1], coords1[0], rot1);
 			break;
 		}
 	}
@@ -132,13 +159,19 @@ int main()
 			rotate_puzzle(puzzle2);
 		}
 		else {
-			printf("x=%d, y=%d, count=%d\n", coords2[0], coords2[1], rot2);
+// functional test for puzzle 2
+#ifdef TESTING
+			if ((coords2[0] == 10) && (coords2[1] == 2) && (rot2 != 17)) {
+				return 1;
+			}
+#endif
+			printf("x=%d, y=%d, count=%d\n", coords2[1], coords2[0], rot2);
 			break;
 		}
 	}
 
+#ifdef DEBUG
 	// Print out arrays for visual testing
-	/*
 	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 20; j++) {
 			printf("%c", puzzle1[i][j]);
@@ -152,6 +185,6 @@ int main()
 		}
 		printf("\n");
 	}
-	*/
+#endif
 	return 0;
 }
