@@ -1,8 +1,7 @@
 ﻿// NocturnalPuzzle.cpp : Defines the entry point for the application.
 //
 
-#include <stdio.h>
-#include <stdbool.h>
+#include "NocturnalPuzzle.h"
 
 void find_word(const char word[], const int size, char puzzle[][20], int coords[])
 {
